@@ -1,0 +1,77 @@
+from turtle import Turtle, Screen
+from player import Player
+from scoreboard import Scoreboard
+from carclass import CarClass, cars, drive_distance
+import random
+import time
+from game_over import GameOver
+
+screen = Screen()
+
+
+screen.screensize(600, 600)
+screen.tracer(0)
+
+player = Player()
+
+screen.listen()
+screen.onkeypress(fun=player.move, key="Up")
+
+score = 0
+scoreboard = Scoreboard(score)
+
+# car_group = CarClass()
+# game_over = GameOver()
+y = 10
+# It is creating cars way too fast. Like a crazy amount. Find a way to make it create slower
+# I will then increase the frequency as the player gets to higher levels
+game_is_on = True
+while game_is_on == True:
+    screen.update()
+    time.sleep(0.1)
+
+    if player.distance(x=0, y=280) < 10:
+        for car in cars:
+            car.goto(x=1000, y=1000)
+        player.goto(x=0, y=-280)
+        scoreboard.clear()
+        score += 1
+        scoreboard = Scoreboard(score)
+        if y >= 2:
+            y -= 1
+        else:
+            game_over = GameOver()
+            game_over.win()
+            game_is_on = False
+        drive_distance += 2
+    for car in cars:
+        if car.distance(player) < 30:
+            game_is_on = False
+            game_over = GameOver()
+            game_over.loss()
+
+    random_num = random.randint(1, y)
+    if random_num == 1:
+        car_group = CarClass()
+    for car in cars:
+        car.drive()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#the while loop will have top exit before the exitonclick method can be executed
+screen.exitonclick()
