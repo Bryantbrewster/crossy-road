@@ -1,0 +1,24 @@
+from turtle import Turtle, Screen
+
+
+class GameOver(Turtle):
+    def __init__(self):
+        super().__init__()
+
+    def loss(self):
+        self.hideturtle()
+        self.penup()
+        self.goto(x=0, y=0)
+        self.penup()
+        self.color('black')
+        self.speed(0)
+        self.write("GAME OVER", False, align="center", font=('Arial', 50, 'bold'))
+
+    def win(self):
+        self.hideturtle()
+        self.penup()
+        self.goto(x=0, y=0)
+        self.penup()
+        self.color('black')
+        self.speed(0)
+        self.write("YOU WIN!", False, align="center", font=('Arial', 50, 'bold'))
