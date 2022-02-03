@@ -1,0 +1,26 @@
+from turtle import Turtle, Screen
+import random
+import time
+colors = ["Red", "Blue", "Yellow", "Purple", "Orange", "Green"]
+
+# I have to create an empty list that each of the cars (once created) will get put into
+# This way, when the car's move method is executed it will apply to every car in the list at once (for loop)
+# Process: car get created, moves a little, another car is created, both of the cars move a little, etc.
+# This way they are staggered when moving across the screen
+
+cars = []
+drive_distance = 10
+
+class CarClass(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.color(random.choice(colors))
+        self.penup()
+        self.shape('square')
+        self.shapesize(1.75, 5)
+        self.setheading(180)
+        self.goto(x=440, y=random.randint(-280, 280))
+        cars.append(self)
+
+    def drive(self):
+        self.forward(drive_distance)
